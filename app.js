@@ -32,12 +32,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // if above req keep passing with "next" (Represents not being handled.), we will enter here.
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -50,4 +50,29 @@ app.use(function(err, req, res, next) {
 
 var Schema = mongoose.Schema
 
-module.exports = app;
+var bookModel = mongoose.model('book', new Schema({
+  name: String,
+  author: String,
+  published_date: Date
+}))
+
+var bookInstance = new bookModel({
+  name: 'Book Name 5',
+  author: "David",
+  published_date: Date.now()
+})
+
+bookInstance.save(function (err) {
+  if (err) return
+  console.log("book instance saved")
+})
+
+var query = bookModel.find({ author: "David" })
+
+query.exec(function (err, books) {
+  if (err) return
+  console.log(books)
+})
+
+
+module.exports = app
