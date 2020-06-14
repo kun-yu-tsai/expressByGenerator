@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var wikiRouter = require('./routes/wiki')
+var catalogRouter = require('./routes/catelog')
 
 var mongoose = require('mongoose')
 
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/wiki', wikiRouter)
+app.use('/catalog', catalogRouter)
 
 // if above req keep passing with "next" (Represents not being handled.), we will enter here.
 app.use(function (req, res, next) {
