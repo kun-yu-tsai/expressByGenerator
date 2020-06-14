@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     res.send('Wiki home page')
 })
 
-router.get('/about', (req,res)=>{
+router.get('/about', (req, res) => {
     res.send('About page')
 })
 
