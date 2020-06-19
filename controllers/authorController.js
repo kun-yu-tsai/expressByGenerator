@@ -2,7 +2,7 @@ var Author = require('../models/author')
 
 exports.author_list = function (req, res, next) {
     Author.find()
-        .populate('author')
+        // .populate('author')
         .sort([['family_name', 'ascending']])
         .exec(function (err, list_authors) {
             if (err) { return next(err); }
